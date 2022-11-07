@@ -7,6 +7,7 @@ export default {
     .setDescription("ping test"),
 
   run: async (client: Client, interaction: ChatInputCommandInteraction) => {
+    await interaction.deferReply()
     const btn = new ActionRowBuilder<ButtonBuilder>().addComponents(ping.data)
     const embed = new EmbedBuilder()
       .setColor("#FF0000")

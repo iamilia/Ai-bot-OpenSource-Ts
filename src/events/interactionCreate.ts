@@ -6,9 +6,6 @@ export default {
   run: async (interaction: ChatInputCommandInteraction) => {
     if (!interaction.isCommand()) return;
     const command = client.commands.get(interaction.commandName);
-
-    await interaction.deferReply();
-
     if (!command) {
       return interaction.followUp({ content: "An error occured while running the command" });
     } else {
