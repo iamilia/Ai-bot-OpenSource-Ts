@@ -1,6 +1,7 @@
 {
   "name": "ai-bot-opensource-ts",
   "version": "1.0.0",
+  "type": "module",
   "description": "new bot from ilia with Ts",
   "main": "index.js",
   "dependencies": {
