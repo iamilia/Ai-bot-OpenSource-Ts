@@ -10,7 +10,8 @@ export async function ConfirmButton(
   interaction: ChatInputCommandInteraction,
   embed: EmbedBuilder
 ) {
-  const msg = await interaction.reply({
+  await interaction.deferReply()
+  const msg = await interaction.followUp({
     embeds: [embed],
     components: [
       new ActionRowBuilder<ButtonBuilder>().addComponents(
@@ -24,10 +25,9 @@ export async function ConfirmButton(
           .setLabel("Cancel")
       ),
     ],
-    fetchReply: true,
+    fetchReply : true
   });
-
-  const i: any = await msg
+  const i : any = await msg
     .awaitMessageComponent({
       time: 1000 * 60,
       filter: (w: any) => w.user.id === interaction.user.id,
@@ -39,7 +39,6 @@ export async function ConfirmButton(
       reason: "Reason: Inactivity Timeout",
       i: null,
     };
-
   return {
     proceed: i.customId == "proceed", // true/false
     i,
