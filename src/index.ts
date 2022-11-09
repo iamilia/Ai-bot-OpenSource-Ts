@@ -1,5 +1,5 @@
 import "dotenv/config";
-import handler from "./handler/index.js";
+import handler from "./handler/index";
 import { Client, Collection } from "discord.js";
 
 declare module "discord.js" {
