@@ -1,4 +1,10 @@
-import { Client, ButtonInteraction, EmbedBuilder, ButtonBuilder, ButtonStyle } from "discord.js";
+import {
+  Client,
+  ButtonInteraction,
+  EmbedBuilder,
+  ButtonBuilder,
+  ButtonStyle,
+} from "discord.js";
 
 export default {
   data: new ButtonBuilder()
@@ -8,13 +14,16 @@ export default {
     .setStyle(ButtonStyle.Primary),
 
   run: async (client: Client, interaction: ButtonInteraction) => {
-    await interaction.deferReply()
+    await interaction.deferReply();
     const embed = new EmbedBuilder()
       .setColor("#123456")
       .setTitle("Button worked!")
       .setDescription("You can use button like this")
       .setTimestamp()
-      .setFooter({ text: `Requested by ${interaction.user.tag}`, iconURL: `${interaction.user.displayAvatarURL()}` });
+      .setFooter({
+        text: `Requested by ${interaction.user.tag}`,
+        iconURL: `${interaction.user.displayAvatarURL()}`,
+      });
     interaction.followUp({ embeds: [embed] });
   },
 };
