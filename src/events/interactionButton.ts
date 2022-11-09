@@ -10,11 +10,7 @@ export default {
 
     await interaction.deferReply();
 
-    if (!command) {
-      return interaction.followUp({
-        content: "An error occured while running the button",
-      });
-    } else {
+    if (command) {
       try {
         await command.default.run(client, interaction);
       } catch (error) {
