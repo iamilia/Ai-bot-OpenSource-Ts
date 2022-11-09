@@ -1,5 +1,6 @@
-import "dotenv/config";
-import handler from "./handler/index";
+import { config } from "dotenv";
+config();
+import handler from "./handler";
 import { Client, Collection } from "discord.js";
 
 declare module "discord.js" {
@@ -10,13 +11,16 @@ declare module "discord.js" {
   }
 }
 
-const client = new Client ({ intents: 32767 });
+const client = new Client({ intents: 32767 });
 
 export default client;
 
 client.commands = new Collection();
 client.buttons = new Collection();
 
-handler(client);
+(async () => {
+  await handler(client);
 
-client.login(process.env.TOKEN);
+  await client.login(process.env.TOKEN);
+  console.log(`${client.user?.tag} is Online `);
+})();

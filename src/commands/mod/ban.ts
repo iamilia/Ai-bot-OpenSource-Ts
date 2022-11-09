@@ -1,5 +1,5 @@
-import { Client, SlashCommandBuilder, ChatInputCommandInteraction, PermissionFlagsBits, GuildMember, EmbedBuilder, time} from "discord.js";
-import {ConfirmButton} from "../../modules/ConfirmButton";
+import { Client, SlashCommandBuilder, ChatInputCommandInteraction, PermissionFlagsBits, GuildMember, EmbedBuilder, time } from "discord.js";
+import { ConfirmButton } from "../../modules/ConfirmButton";
 
 export default {
     data: new SlashCommandBuilder()
@@ -59,9 +59,9 @@ export default {
                             .setTitle("You were banned")
                             .setColor("Blurple")
                             .addFields(
-                                {name : `Reason`, value : `${reason}`}, 
-                                {name : `ServerName : `, value: `${interaction.guild?.name}`},
-                                {name : `time :`, value: time(new Date(), "F")}
+                                { name: `Reason`, value: `${reason}` },
+                                { name: `ServerName : `, value: `${interaction.guild?.name}` },
+                                { name: `time :`, value: time(new Date(), "F") }
                             ),
                     ],
                 });
@@ -74,7 +74,7 @@ export default {
                 embeds: [embed],
                 components: [],
             });
-            return await member.ban({reason : `${reason}`});
+            return await member.ban({ reason: `${reason}` });
         }
 
         const embed = new EmbedBuilder()

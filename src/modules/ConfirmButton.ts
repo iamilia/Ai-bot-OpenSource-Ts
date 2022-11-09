@@ -1,5 +1,15 @@
-import { ActionRowBuilder, ButtonBuilder, ButtonStyle, ChatInputCommandInteraction, EmbedBuilder } from "discord.js";
-export async function ConfirmButton(interaction : ChatInputCommandInteraction, embed : EmbedBuilder) {
+import {
+    ActionRowBuilder,
+    ButtonBuilder,
+    ButtonStyle,
+    ChatInputCommandInteraction,
+    EmbedBuilder,
+} from "discord.js";
+
+export async function ConfirmButton(
+    interaction: ChatInputCommandInteraction,
+    embed: EmbedBuilder
+) {
     const msg = await interaction.reply({
         embeds: [embed],
         components: [
@@ -17,26 +27,21 @@ export async function ConfirmButton(interaction : ChatInputCommandInteraction, e
         fetchReply: true,
     });
 
-    const i = await msg
+    const i: any = await msg
         .awaitMessageComponent({
             time: 1000 * 60,
-            filter: (i) => i.user.id === interaction.user.id,
+            filter: (w: any) => w.user.id === interaction.user.id,
         })
         .catch(() => null);
     if (!i)
         return {
             proceed: false,
             reason: "Reason: Inactivity Timeout",
-            i : null,
+            i: null,
         };
 
-    if (i.customId === "proceed")
-        return {
-            proceed: true,
-            i,
-        };
     return {
-        proceed: false,
+        proceed: i.customId == "proceed", // true/false
         i,
     };
-}
+}  
