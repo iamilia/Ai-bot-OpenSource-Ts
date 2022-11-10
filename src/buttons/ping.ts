@@ -14,7 +14,6 @@ export default {
         .setStyle(ButtonStyle.Primary),
 
     run: async (client: Client, interaction: ButtonInteraction) => {
-        await interaction.deferReply();
         const embed = new EmbedBuilder()
             .setColor("#123456")
             .setTitle("Button worked!")
