@@ -19,6 +19,7 @@ client.commands = new Collection();
 client.buttons = new Collection();
 
 (async () => {
+    console.clear()
     await handler(client);
     await client.login(process.env.TOKEN);
 })();

@@ -13,9 +13,9 @@ export default async (client: any) => {
       const command = await import(`../commands/${category}/${file}`);
       await client.commands.set(command.default.data.name, command.default);
       commandsArray.push(command.default.data);
-      console.log(`${command.default.data.name} command loaded successfully.`);
     }
   }
+  console.log(`${commandsArray.length} command loaded successfully.`);
 
   const buttonsFiles = readdirSync("./src/buttons").filter((file) =>
     regexTsOrJs.test(file)
