@@ -11,7 +11,7 @@ function Setst(client: any) :void {
     client.user.setStatus(`${sta}`)
 }
 function SetAt(client: any) :void {
-    const statusArray = ['Playing WIth Ts, 0', `Watching GithubSorce, 3`];
+    const statusArray = ['Running With Ts, 0', `Watching GithubSorce, 3`];
     const random = statusArray[Math.floor(Math.random() * statusArray.length)].split(', ')
     const status = random[0];
     const mode = parseInt(random[1]);
