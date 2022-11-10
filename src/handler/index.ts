@@ -3,19 +3,33 @@ import "dotenv/config";
 
 const regexTsOrJs = /\.ts$|\.js$/;
 export default async (client: any) => {
-  const commandsArray: Array<[]> = [];
-  const commandFolders = readdirSync("./src/commands");
-  for (const category of commandFolders) {
-    const commandFiles = readdirSync(`./src/commands/${category}`).filter(
+  const SlashcommandsArray: Array<[]> = [];
+  const SlashcommandFolders = readdirSync("./src/Slashcommands");
+  for (const category of SlashcommandFolders) {
+    const commandFiles = readdirSync(`./src/Slashcommands/${category}`).filter(
       (file) => regexTsOrJs.test(file)
     );
     for (const file of commandFiles) {
-      const command = await import(`../commands/${category}/${file}`);
+      const command = await import(`../Slashcommands/${category}/${file}`);
       await client.commands.set(command.default.data.name, command.default);
-      commandsArray.push(command.default.data);
+      SlashcommandsArray.push(command.default.data);
     }
   }
-  console.log(`${commandsArray.length} command loaded successfully.`);
+  console.log(`Slashcommands : ${SlashcommandsArray.length} loaded successfully.`);
+
+  const ChatcommandsArray: Array<[]> = [];
+  const ChatcommandFolders = readdirSync("./src/Chatcommands");
+  for (const category of ChatcommandFolders) {
+    const commandFiles = readdirSync(`./src/Chatcommands/${category}`).filter(
+      (file) => regexTsOrJs.test(file)
+    );
+    for (const file of commandFiles) {
+      const command = await import(`../Chatcommands/${category}/${file}`);
+      await client.Chatcommands.set(command.default.name, command.default);
+      ChatcommandsArray.push(command.default.data);
+    }
+  }
+  console.log(`Chatcommand : ${ChatcommandsArray.length} loaded successfully.`);
 
   const buttonsFiles = readdirSync("./src/buttons").filter((file) =>
     regexTsOrJs.test(file)
@@ -48,7 +62,7 @@ export default async (client: any) => {
   client.on("ready", async () => {
     await client.guilds.cache
       .get(process.env.GUILD)
-      .commands.set(commandsArray);
-    await client.application.commands.set(commandsArray);
+      .commands.set(SlashcommandsArray);
+    await client.application.commands.set(SlashcommandsArray);
   });
 };

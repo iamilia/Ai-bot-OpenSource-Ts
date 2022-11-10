@@ -1,22 +1,33 @@
 import { config } from "dotenv";
 config();
 import handler from "./handler";
-import { Client, Collection } from "discord.js";
+import { Client, Collection, GatewayIntentBits, Partials } from "discord.js";
 
 declare module "discord.js" {
     export interface Client {
         commands: Collection<string, any>;
         buttons: Collection<string, any>;
         modals: Collection<string, any>;
+        Chatcommands: Collection<string, any>;
     }
 }
 
-const client = new Client({ intents: 32767 });
+const client = new Client({
+    intents: [
+        GatewayIntentBits.DirectMessages,
+        GatewayIntentBits.Guilds,
+        GatewayIntentBits.GuildBans,
+        GatewayIntentBits.GuildMessages,
+        GatewayIntentBits.MessageContent,
+    ],
+    partials: [Partials.Channel],
+});
 
 export default client;
 
 client.commands = new Collection();
 client.buttons = new Collection();
+client.Chatcommands = new Collection();
 
 (async () => {
     console.clear()
