@@ -34,7 +34,7 @@ export default {
         const titel = interaction.options.getString("titel");
         const desc = interaction.options.getString("desc");
         const tag = interaction.options.getString("tag");
-        const webhook = new WebhookClient({ url: `${process.env.WebHookAnnounce}` })
+        const webhook = new WebhookClient({ url: String(process.env.WebHookAnnounce) })
         const em = new EmbedBuilder()
         em.setTitle(titel)
         em.setDescription(desc)
