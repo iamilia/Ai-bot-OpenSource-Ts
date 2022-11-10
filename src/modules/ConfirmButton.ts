@@ -10,17 +10,18 @@ export async function ConfirmButton(
   interaction: ChatInputCommandInteraction,
   embed: EmbedBuilder
 ) {
-  await interaction.deferReply()
-  const msg = await interaction.followUp({
+  const msg = await interaction.reply({
     embeds: [embed],
     components: [
       new ActionRowBuilder<ButtonBuilder>().addComponents(
         new ButtonBuilder()
           .setCustomId("proceed")
           .setStyle(ButtonStyle.Success)
+          .setEmoji("✔️")
           .setLabel("Proceed"),
-        new ButtonBuilder()
+          new ButtonBuilder()
           .setCustomId("cancel")
+          .setEmoji("❌")
           .setStyle(ButtonStyle.Danger)
           .setLabel("Cancel")
       ),
