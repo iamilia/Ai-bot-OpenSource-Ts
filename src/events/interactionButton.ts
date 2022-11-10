@@ -8,9 +8,9 @@ export default {
     if (!interaction.isButton()) return;
     const command = client.buttons.get(interaction.customId);
 
-    await interaction.deferReply();
-
+    
     if (command) {
+      await interaction.deferReply();
       try {
         await command.default.run(client, interaction);
       } catch (error) {
