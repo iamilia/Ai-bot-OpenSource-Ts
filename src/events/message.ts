@@ -9,14 +9,14 @@ export default {
         if (!msg.content.startsWith(prefix)) return;
         if (msg.channel.type !== ChannelType.GuildText) return;                
         let args = msg.content.substring(prefix.length).split(" ")
-        const command = client.Chatcommands.get(args[0].toLowerCase()) || client.Chatcommands.find((c) => c.alia.includes(args[0].toLowerCase()));
+        const command = await client.Chatcommands.get(args[0].toLowerCase()) || client.Chatcommands.find((c) => c?.alia.includes(args[0].toLowerCase()));
         let nocmd_embed = new EmbedBuilder()
             .setDescription(`:x: | No Command Found! Try Using  \`/help\``)
             .setColor("Red")
             .setTimestamp();
-        if (!command) return msg.reply({ embeds: [nocmd_embed] });
+        if (!command) return await msg.reply({ embeds: [nocmd_embed] });
         try {
-            command.run(client, msg, args);
+            await command.run(client, msg, args);
         } catch (error) {
             console.error(error);
         }
